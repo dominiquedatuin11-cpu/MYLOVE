@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goodbye Letter</title>
+    <style>
+        :root {
+            --bg1: #fff6f8;
+            --bg2: #ffe4ee;
+            --pink: #ff5d8f;
+            --pink-dark: #d93d73;
+            --rose: #ff99b9;
+            --peach: #ffd8df;
+            --gold: #f8d98a;
+            --text: #4f2d38;
+            --muted: #764d5d;
+            --card: rgba(255, 255, 255, 0.7);
+            --shadow: rgba(214, 61, 115, 0.18);
+        }
+
+        * { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg1), var(--bg2), #fffafc);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            bottom: -120px;
+            font-size: clamp(1.2rem, 2vw, 2rem);
+            color: rgba(255, 93, 143, 0.55);
+            animation: floatUp linear infinite;
+            text-shadow: 0 0 12px rgba(255, 93, 143, 0.18);
+        }
+
+        .floating-hearts span:nth-child(1) { left: 8%; animation-duration: 16s; }
+        .floating-hearts span:nth-child(2) { left: 18%; animation-duration: 14s; animation-delay: 1.5s; }
+        .floating-hearts span:nth-child(3) { left: 30%; animation-duration: 17s; animation-delay: 2.4s; }
+        .floating-hearts span:nth-child(4) { left: 42%; animation-duration: 15s; animation-delay: 0.5s; }
+        .floating-hearts span:nth-child(5) { left: 58%; animation-duration: 18s; animation-delay: 2.8s; }
+        .floating-hearts span:nth-child(6) { left: 68%; animation-duration: 13s; animation-delay: 1.2s; }
+        .floating-hearts span:nth-child(7) { left: 80%; animation-duration: 19s; animation-delay: 3.2s; }
+        .floating-hearts span:nth-child(8) { left: 90%; animation-duration: 14s; animation-delay: 0.8s; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.75) rotate(0deg);
+                opacity: 0;
+            }
+            18% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) scale(1.5) rotate(18deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: min(920px, calc(100% - 28px));
+            margin: 40px auto;
+            padding: 20px 0 50px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 28px 70px var(--shadow);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            padding: 34px 30px 10px;
+        }
+
+        .eyebrow {
+            margin: 0;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            color: var(--pink-dark);
+            font-weight: 800;
+        }
+
+        h1 {
+            margin: 14px 0 6px;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            line-height: 0.9;
+            letter-spacing: -0.08em;
+            color: var(--pink-dark);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .divider {
+            width: 140px;
+            height: 3px;
+            margin: 18px auto 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, var(--pink), var(--gold), transparent);
+        }
+
+        .letter {
+            padding: 18px 34px 8px;
+        }
+
+        .letter p {
+            margin: 0 0 22px;
+            font-size: clamp(1.02rem, 1.9vw, 1.17rem);
+            line-height: 1.9;
+            color: var(--text);
+            text-wrap: pretty;
+        }
+
+        .highlight {
+            display: inline-block;
+            background: linear-gradient(120deg, rgba(255, 93, 143, 0.12), rgba(248, 217, 138, 0.2));
+            border-radius: 999px;
+            padding: 0.08em 0.5em;
+            font-weight: 700;
+        }
+
+        .final-line {
+            text-align: center;
+            padding: 16px 24px 32px;
+        }
+
+        .signature {
+            margin-bottom: 18px;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--pink-dark);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 14px 24px;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+            color: #fff;
+            box-shadow: 0 18px 28px rgba(217, 61, 115, 0.25);
+        }
+
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--pink-dark);
+            border: 1px solid rgba(217, 61, 115, 0.18);
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                margin: 22px auto 32px;
+            }
+
+            .card {
+                border-radius: 24px;
+            }
+
+            .header,
+            .letter,
+            .final-line {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" aria-hidden="true">
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+        <span>❤</span>
+    </div>
+
+    <main class="container">
+        <section class="card">
+            <header class="header">
+                <p class="eyebrow">A final letter</p>
+                <h1>Goodbye</h1>
+                <div class="divider"></div>
+            </header>
+
+            <div class="letter">
+                <p>Hi Yna, first of all, I love you to the point that sometimes I choose to ignore the pain even when it is already hurting me deeply, because losing you feels heavier than anything I am going through. I know you do not want me to drain myself for you, and I know you have said that before, but I cannot help it because this is how much I love you.</p>
+
+                <p>When you love someone this deeply, you tend to give more than you should, even when it starts to hurt, even when it slowly takes pieces of you away. I am willing to sacrifice everything for you, even if it hurts, even if it becomes too much, and even if there are days when I feel like I am slowly losing parts of myself, as long as you are happy and you feel that someone is still choosing to stay with you no matter what.</p>
+
+                <p>I do not want to be a burden to you, that is why most of the time I choose to keep everything to myself even when what I am feeling is already too heavy. I am scared that if I open up too much, it might push you away or turn into another misunderstanding, and I do not want that. So I stay quiet, not because I do not feel anything, but because I am trying to protect what we have.</p>
+
+                <p>I love you so much, and with you I felt things I never thought I would ever feel in my life—a kind of love that was so pure, so deep, and so real that it changed me completely. But at the same time, you are also the person who made me feel a kind of pain I never imagined I would go through, and that pain hits differently because it came from the same person who once made me feel so safe and so loved.</p>
+
+                <p>I just hope that when you are having a hard time, you would still look at me the way you used to, the way you used to see me before—like I still matter, like I am still someone you choose even when things are not easy. I am not asking for everything to go back to how it was before. I just want to feel your love again, even in the smallest ways, even just a little, even if it is not the same as before, just enough to remind me that what we have is still real.</p>
+
+                <p>Please do not ever think that I stayed because I had no choice, because that is not true. I stayed because I was sure about you. I never thought of letting go, and even now, part of me still does not want to.</p>
+
+                <p>I miss the old us. I miss the way we used to be, the way you used to comfort me, and the way everything felt so easy whenever I was with you. I really need your hug right now. I just want to be in your arms again because that is always where I felt the safest.</p>
+
+                <p>I know we are not perfect, and I know we have both made mistakes. But despite everything, my heart still chooses you every single day. I do not want to lose what we built together. I still believe in us, and I still believe that we can find our way back to each other if we both try.</p>
+
+                <p>I just miss us so much. I miss laughing with you, talking to you for hours, feeling close to you, and knowing that everything would be okay as long as we had each other. It hurts because I still love you with all my heart, and that love has not changed.</p>
+
+                <p><span class="highlight">I love you today, tomorrow, and every day after that.</span> No matter how difficult things become, a part of my heart will always belong to you. I just hope that one day, we can find our way back to the kind of love that once made us feel like home.</p>
+            </div>
+
+            <div class="final-line">
+                <div class="signature">With all my love, always.</div>
+                <div class="actions">
+                    <a class="button secondary" href="index.html">Open the love page</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
